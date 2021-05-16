@@ -21,6 +21,10 @@ echo "$1" | grep '^/video'
 if [ $? = 0 ]; then
 	str="$(grep 'video_related=' 'input.html' | sed 's/,/\n/g')"
 	video="$(grep 'setVideoUrlHigh' 'input.html' | cut -d"'" -f2)"
+	video_low="$(grep 'setVideoUrlLow' 'input.html' | cut -d"'" -f2)"
+	if [ -z "$video" ]; then
+		video="$video_low"
+	fi
 	grep 'video-hd-mark' 'input.html'
 	if [ "$?" -eq 0 ]; then
 		video_hls="$(grep 'setVideoHLS' 'input.html' | cut -d"'" -f2)"
