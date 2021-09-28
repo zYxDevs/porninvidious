@@ -50,7 +50,7 @@ echo "$urls" > urls.txt
 echo "$HTML_START" >> output.html
 echo "$HTML_VIDEO" >> output.html
 for i in $(seq "$(wc -l urls.txt | cut -d' ' -f1)"); do
-	url="$(tail "+$i" urls.txt | sed 1q)"
+	url="$(tail -n "+$i" urls.txt | sed 1q)"
 	title="$(echo "$url" | cut -d'/' -f5 | sed 's/_/ /g')"
 	if [ -z "$title" ]; then
 		title="$(echo "$url" | cut -d'/' -f3 | sed 's/_/ /g')"
@@ -58,9 +58,10 @@ for i in $(seq "$(wc -l urls.txt | cut -d' ' -f1)"); do
 	if [ "$title" = "THUMBNUM" ]; then
 		title="$(echo "$url" | cut -d'/' -f4 | sed 's/_/ /g')"
 	fi
-	thumb="$(tail "+$i" thumbs.txt | sed 1q | sed 's/THUMBNUM/1/g')"
+	thumb="$(tail -n "+$i" thumbs.txt | sed 1q | sed 's/THUMBNUM/1/g')"
 	echo "<div><a href='$url'><img src='$thumb'/><br/>$title</a></div>" >> output.html
 done
+
 echo "$HTML_STYLE" >> output.html
 echo "$HTML_END" >> output.html
 
