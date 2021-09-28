@@ -15,6 +15,11 @@ a {
   color: white;
   text-decoration: none;
 }
+
+a:hover {
+  text-decoration: underline;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -24,15 +29,48 @@ form {
   text-align: center;
   margin-bottom: 10vh;
 }
+
+section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
 div {
-  width: 33.33%;
-  height: 40vh;
   left: 0;
   right: 0;
+  padding: 1em;
   text-align: center;
-  float: left;
 }
+
+img {
+  width: 80%;
+}
+
 video {
   margin-top: -4vh;
   margin-bottom: 0.5vh;
+}
+
+@media screen and (max-width: 1200px) { /* Half screen */
+  section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  div {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1000px) { /* Mobile */
+  section {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  h1, #infoblock, div {
+    font-size: 2em;
+  }
+
+  form input {
+    font-size: 2rem;
+  }
 }
